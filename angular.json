@@ -31,9 +31,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/halfmoon/css/halfmoon.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/halfmoon/js/halfmoon.min.js"
+            ]
           },
           "configurations": {
             "production": {
