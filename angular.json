@@ -32,10 +32,15 @@
             ],
             "styles": [
               "node_modules/halfmoon/css/halfmoon.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/halfmoon/js/halfmoon.min.js"
+              "node_modules/@fortawesome/fontawesome-free/js/brands.min.js",
+              "node_modules/@fortawesome/fontawesome-free/js/solid.min.js",
+              "node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js",
+              "node_modules/halfmoon/js/halfmoon.min.js",
+              "src/scripts.js"
             ]
           },
           "configurations": {

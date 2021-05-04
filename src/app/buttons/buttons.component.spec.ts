@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HalfmoonAngularComponent } from './halfmoon-angular.component';
+import { ButtonsComponent } from './buttons.component';
 
-describe('HalfmoonAngularComponent', () => {
-  let component: HalfmoonAngularComponent;
-  let fixture: ComponentFixture<HalfmoonAngularComponent>;
+describe('ButtonsComponent', () => {
+  let component: ButtonsComponent;
+  let fixture: ComponentFixture<ButtonsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HalfmoonAngularComponent ]
+      declarations: [ ButtonsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HalfmoonAngularComponent);
+    fixture = TestBed.createComponent(ButtonsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
