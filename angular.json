@@ -125,6 +125,46 @@
           }
         }
       }
+    },
+    "halfmoon-angular": {
+      "projectType": "library",
+      "root": "projects/halfmoon-angular",
+      "sourceRoot": "projects/halfmoon-angular/src",
+      "prefix": "hm",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/halfmoon-angular/tsconfig.lib.json",
+            "project": "projects/halfmoon-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/halfmoon-angular/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/halfmoon-angular/src/test.ts",
+            "tsConfig": "projects/halfmoon-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/halfmoon-angular/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/halfmoon-angular/tsconfig.lib.json",
+              "projects/halfmoon-angular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "halfmoon-angular-test"
