@@ -6,6 +6,7 @@
     "prestart": "npm run build:halfmoon",
     "start": "ng serve",
     "build": "ng build",
+    "build:halfmoon-app": "ng build halfmoon-angular-test --prod",
     "build:halfmoon": "ng build halfmoon-angular --prod",
     "test": "ng test",
     "lint": "ng lint",
