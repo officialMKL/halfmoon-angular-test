@@ -1,0 +1,1068 @@
+{
+    "pipes": [],
+    "interfaces": [],
+    "injectables": [],
+    "classes": [
+        {
+            "name": "AppPage",
+            "id": "class-AppPage-ee2067dfb1c303f41003aea7d82d51e0",
+            "file": "e2e/src/app.po.ts",
+            "type": "class",
+            "sourceCode": "import { browser, by, element } from 'protractor';\n\nexport class AppPage {\n  async navigateTo(): Promise<unknown> {\n    return browser.get(browser.baseUrl);\n  }\n\n  async getTitleText(): Promise<string> {\n    return element(by.css('app-root .content span')).getText();\n  }\n}\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getTitleText",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Promise<string>",
+                    "typeParameters": [],
+                    "line": 8,
+                    "modifierKind": [
+                        120
+                    ]
+                },
+                {
+                    "name": "navigateTo",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Promise<unknown>",
+                    "typeParameters": [],
+                    "line": 4,
+                    "modifierKind": [
+                        120
+                    ]
+                }
+            ],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
+    "directives": [
+        {
+            "name": "ButtonDirective",
+            "id": "directive-ButtonDirective-63ada7c1f4f8036be0583610b697d534",
+            "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+            "type": "directive",
+            "description": "",
+            "sourceCode": "import {Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChange, SimpleChanges} from '@angular/core';\n\nexport type Appearance = 'primary' | 'secondary' | 'success' | 'danger' | 'link' | undefined;\n\nexport type Sizing = 'sm' | 'lg' | undefined;\n\nexport type Shape = 'rounded' | 'square' | undefined;\n\n@Directive({\n  selector: '[hmButton]',\n})\nexport class ButtonDirective implements OnChanges {\n  @Input() appearance: Appearance;\n  @Input() size: Sizing;\n  @Input() shape: Shape;\n  @Input() disabled: boolean;\n\n  constructor(private el: ElementRef, private renderer: Renderer2) {\n    this.addClass('btn');\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes.appearance) {\n      this.applyChange(changes.appearance);\n    }\n    if (changes.size) {\n      this.applyChange(changes.size);\n    }\n    if (changes.shape) {\n      this.applyChange(changes.shape);\n    }\n    if (changes.disabled) {\n      this.applyDisabled(changes.disabled);\n    }\n  }\n\n  private applyChange(change: SimpleChange): void {\n    if (this.hasValueChanged(change)) {\n      return;\n    }\n\n    if (!change.isFirstChange()) {\n      this.removeClass(`btn-${change.previousValue}`);\n    }\n    this.addClass(`btn-${change.currentValue}`);\n  }\n\n  private hasValueChanged(change: SimpleChange): boolean {\n    return !change.currentValue || change.previousValue === change.currentValue;\n  }\n\n  private addClass(cls: string): void {\n    this.renderer.addClass(this.el.nativeElement, cls);\n  }\n\n  private removeClass(cls: string): void {\n    this.renderer.removeClass(this.el.nativeElement, cls);\n  }\n\n  private applyDisabled(change: SimpleChange): void {\n    if (change.previousValue === change.currentValue) {\n      return;\n    }\n\n    if (!change.currentValue) {\n      this.renderer.removeAttribute(this.el.nativeElement, 'disabled');\n      this.removeClass('disabled');\n      return;\n    }\n\n    this.addClass('disabled');\n    this.renderer.setAttribute(this.el.nativeElement, 'disabled', 'disabled');\n  }\n}\n",
+            "selector": "[hmButton]",
+            "providers": [],
+            "inputsClass": [
+                {
+                    "name": "appearance",
+                    "line": 13,
+                    "type": "Appearance"
+                },
+                {
+                    "name": "disabled",
+                    "line": 16,
+                    "type": "boolean"
+                },
+                {
+                    "name": "shape",
+                    "line": 15,
+                    "type": "Shape"
+                },
+                {
+                    "name": "size",
+                    "line": 14,
+                    "type": "Sizing"
+                }
+            ],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "addClass",
+                    "args": [
+                        {
+                            "name": "cls",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 52,
+                    "modifierKind": [
+                        112
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "cls",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "applyChange",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChange"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "modifierKind": [
+                        112
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChange",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "applyDisabled",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChange"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 60,
+                    "modifierKind": [
+                        112
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChange",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "hasValueChanged",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChange"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 48,
+                    "modifierKind": [
+                        112
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChange",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "removeClass",
+                    "args": [
+                        {
+                            "name": "cls",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 56,
+                    "modifierKind": [
+                        112
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "cls",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "implements": [
+                "OnChanges"
+            ],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "el",
+                        "type": "ElementRef"
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2"
+                    }
+                ],
+                "line": 16,
+                "jsdoctags": [
+                    {
+                        "name": "el",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-37b766b6c49f9fc3db19f83be7bc82c7",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [
+                "./app.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "'halfmoon-angular-test'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'halfmoon-angular-test';\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./app.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"page-wrapper with-navbar\">\n  <!-- Navbar (immediate child of the page wrapper) -->\n  <nav class=\"navbar\">\n    <!-- Navbar brand -->\n    <a href=\"#\" class=\"navbar-brand\">\n      Angular Showcase\n    </a>\n    <!-- Navbar text -->\n    <span class=\"navbar-text text-monospace\">v0.1</span> <!-- text-monospace = font-family shifted to monospace -->\n    <!-- Navbar nav -->\n    <ul class=\"navbar-nav d-none d-md-flex\"> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px) -->\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"buttons\">Buttons</a>\n      </li>\n    </ul>\n    <!-- Navbar content (with the dropdown menu) -->\n    <div class=\"navbar-content d-md-none ml-auto\"> <!-- d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto -->\n      <div class=\"dropdown with-arrow\">\n        <button class=\"btn\" data-toggle=\"dropdown\" type=\"button\" id=\"navbar-dropdown-toggle-btn-1\">\n          Menu\n          <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i>\n        </button>\n        <div class=\"dropdown-menu dropdown-menu-right w-200\" aria-labelledby=\"navbar-dropdown-toggle-btn-1\"> <!-- w-200 = width: 20rem (200px) -->\n          <a routerLink=\"buttons\" class=\"dropdown-item\">Buttons</a>\n          <div class=\"dropdown-divider\"></div>\n        </div>\n      </div>\n    </div>\n  </nav>\n\n  <!-- Content wrapper -->\n  <div class=\"content-wrapper\">\n    <h1>Halfmoon UI | Angular Library</h1>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+        },
+        {
+            "name": "ButtonsComponent",
+            "id": "component-ButtonsComponent-7f8ef38a7683b9cc9faeda6fe01bf33d",
+            "file": "src/app/buttons/buttons.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-buttons",
+            "styleUrls": [
+                "./buttons.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./buttons.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-buttons',\n  templateUrl: './buttons.component.html',\n  styleUrls: ['./buttons.component.scss']\n})\nexport class ButtonsComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".button-container {\n  display: block;\n  width: fit-content;\n  margin: 5px auto;\n  > * + * {\n    margin-left: 1rem;\n  }\n}\n",
+                    "styleUrl": "./buttons.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<h2>Buttons</h2>\n<h3>All appearances</h3>\n<div class=\"button-container\">\n  <button hmButton>Default</button>\n  <button hmButton appearance=\"primary\">Primary</button>\n  <button hmButton appearance=\"danger\">Danger</button>\n  <button hmButton appearance=\"link\">Link</button>\n  <button hmButton appearance=\"success\">Success</button>\n  <button hmButton appearance=\"secondary\">Secondary</button>\n</div>\n<h3>Tags</h3>\n<div class=\"button-container\">\n  <button hmButton>Default</button>\n  <input hmButton appearance=\"primary\" type=\"submit\" value=\"Input-Button\">\n  <a hmButton appearance=\"link\" role=\"button\" href=\"#\">Link</a>\n</div>\n<h3>Sizing</h3>\n<div class=\"button-container\">\n  <button hmButton size=\"lg\">Default</button>\n  <button hmButton appearance=\"primary\" size=\"lg\">Primary</button>\n</div>\n<div class=\"button-container\">\n  <button hmButton size=\"sm\">Default</button>\n  <button hmButton appearance=\"primary\" size=\"sm\">Primary</button>\n</div>\n<h3>Shapes</h3>\n<div class=\"button-container\">\n  <button hmButton shape=\"rounded\">Default</button>\n  <button hmButton appearance=\"primary\" shape=\"rounded\">Primary</button>\n</div>\n<div class=\"button-container\">\n  <button hmButton shape=\"rounded\" size=\"sm\">1</button>\n  <button hmButton appearance=\"primary\" shape=\"rounded\">2</button>\n  <button hmButton shape=\"rounded\" size=\"lg\">3</button>\n</div>\n<div class=\"button-container\">\n  <button hmButton shape=\"square\">&times;</button>\n  <button hmButton appearance=\"primary\" shape=\"square\">+</button>\n</div>\n<div class=\"button-container\">\n  <button hmButton shape=\"square\" size=\"sm\">1</button>\n  <button hmButton appearance=\"primary\" shape=\"square\">2</button>\n  <button hmButton shape=\"square\" size=\"lg\">3</button>\n</div>\n<h3>Disabled</h3>\n<div class=\"button-container\">\n  <button hmButton [disabled]=\"true\">Default</button>\n  <button hmButton appearance=\"primary\" [disabled]=\"true\">Primary</button>\n</div>\n"
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "ButtonsComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "HalfmoonModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppRoutingModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "HalfmoonModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ButtonDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "ButtonDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "appearance",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "object",
+                "defaultValue": "{\n  options: ['', 'primary', 'secondary', 'danger', 'success', 'link', undefined],\n  control: {\n    type: 'select'\n  }\n}"
+            },
+            {
+                "name": "BASE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "",
+                "defaultValue": "TEMPLATE.bind({})"
+            },
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/test.ts",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "object",
+                "defaultValue": "{\n  control: {\n    type: 'boolean'\n  }\n}"
+            },
+            {
+                "name": "DISABLED",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "",
+                "defaultValue": "TEMPLATE.bind({})"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "type": "object",
+                "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "type": "literal type"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/test.ts",
+                "type": "literal type"
+            },
+            {
+                "name": "shape",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "object",
+                "defaultValue": "{\n  options: ['square', 'rounded', undefined],\n  control: {\n    type: 'select'\n  }\n}"
+            },
+            {
+                "name": "SHAPE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "",
+                "defaultValue": "TEMPLATE.bind({})"
+            },
+            {
+                "name": "size",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "object",
+                "defaultValue": "{\n  options: ['sm', 'lg', undefined],\n  control: {\n    type: 'select'\n  }\n}"
+            },
+            {
+                "name": "SIZING",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "",
+                "defaultValue": "TEMPLATE.bind({})"
+            },
+            {
+                "name": "TEMPLATE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "Story",
+                "defaultValue": "(args) => ({\n  props: {\n    ...args,\n    buttonText: text('Button-Text', 'Showcase')\n  },\n  template: `<button hmButton [appearance]=\"appearance\" [shape]=\"shape\" [size]=\"size\" [disabled]=\"disabled\">{{buttonText}}</button>`\n})"
+            }
+        ],
+        "functions": [],
+        "typealiases": [
+            {
+                "name": "Appearance",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"primary\" | \"secondary\" | \"success\" | \"danger\" | \"link\" | undefined",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                "description": "",
+                "kind": 168
+            },
+            {
+                "name": "Shape",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"rounded\" | \"square\" | undefined",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                "description": "",
+                "kind": 168
+            },
+            {
+                "name": "Sizing",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"sm\" | \"lg\" | undefined",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                "description": "",
+                "kind": 168
+            }
+        ],
+        "enumerations": [
+            {
+                "name": "ButtonAppearance",
+                "childs": [
+                    {
+                        "name": "PRIMARY"
+                    },
+                    {
+                        "name": "SECONDARY"
+                    },
+                    {
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "name": "DANGER"
+                    },
+                    {
+                        "name": "LINK"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "description": "",
+                "file": "projects/halfmoon-angular/src/lib/basics/button/button-appearance.ts"
+            }
+        ],
+        "groupedVariables": {
+            "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts": [
+                {
+                    "name": "appearance",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  options: ['', 'primary', 'secondary', 'danger', 'success', 'link', undefined],\n  control: {\n    type: 'select'\n  }\n}"
+                },
+                {
+                    "name": "BASE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "TEMPLATE.bind({})"
+                },
+                {
+                    "name": "disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  control: {\n    type: 'boolean'\n  }\n}"
+                },
+                {
+                    "name": "DISABLED",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "TEMPLATE.bind({})"
+                },
+                {
+                    "name": "shape",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  options: ['square', 'rounded', undefined],\n  control: {\n    type: 'select'\n  }\n}"
+                },
+                {
+                    "name": "SHAPE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "TEMPLATE.bind({})"
+                },
+                {
+                    "name": "size",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  options: ['sm', 'lg', undefined],\n  control: {\n    type: 'select'\n  }\n}"
+                },
+                {
+                    "name": "SIZING",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "TEMPLATE.bind({})"
+                },
+                {
+                    "name": "TEMPLATE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\n  props: {\n    ...args,\n    buttonText: text('Button-Text', 'Showcase')\n  },\n  template: `<button hmButton [appearance]=\"appearance\" [shape]=\"shape\" [size]=\"size\" [disabled]=\"disabled\">{{buttonText}}</button>`\n})"
+                }
+            ],
+            "src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "type": "literal type"
+                }
+            ],
+            "projects/halfmoon-angular/src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/test.ts",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/halfmoon-angular/src/test.ts",
+                    "type": "literal type"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {
+            "projects/halfmoon-angular/src/lib/basics/button/button-appearance.ts": [
+                {
+                    "name": "ButtonAppearance",
+                    "childs": [
+                        {
+                            "name": "PRIMARY"
+                        },
+                        {
+                            "name": "SECONDARY"
+                        },
+                        {
+                            "name": "SUCCESS"
+                        },
+                        {
+                            "name": "DANGER"
+                        },
+                        {
+                            "name": "LINK"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "description": "",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button-appearance.ts"
+                }
+            ]
+        },
+        "groupedTypeAliases": {
+            "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts": [
+                {
+                    "name": "Appearance",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"primary\" | \"secondary\" | \"success\" | \"danger\" | \"link\" | undefined",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                    "description": "",
+                    "kind": 168
+                },
+                {
+                    "name": "Shape",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"rounded\" | \"square\" | undefined",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                    "description": "",
+                    "kind": 168
+                },
+                {
+                    "name": "Sizing",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"sm\" | \"lg\" | undefined",
+                    "file": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                    "description": "",
+                    "kind": 168
+                }
+            ]
+        }
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "className": "AppModule",
+        "children": [
+            {
+                "name": "routes",
+                "filename": "src/app/app-routing.module.ts",
+                "module": "AppRoutingModule",
+                "children": [
+                    {
+                        "path": "buttons",
+                        "component": "ButtonsComponent"
+                    },
+                    {
+                        "path": "**",
+                        "redirectTo": "buttons"
+                    }
+                ],
+                "kind": "module"
+            }
+        ]
+    },
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "e2e/src/app.po.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AppPage",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "ButtonDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "appearance",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BASE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DISABLED",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "shape",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SHAPE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "size",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SIZING",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/lib/basics/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TEMPLATE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/halfmoon-angular/src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/buttons/buttons.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}
